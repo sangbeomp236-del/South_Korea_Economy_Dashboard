@@ -1,0 +1,41 @@
+name: Refresh Korea dashboard data
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily at 12:17 UTC. A daily schedule is intentionally more frequent than
+    # most source releases; a successful refresh may legitimately show no new values.
+    - cron: "17 12 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Refresh BIS data
+        run: python refresh_data.py
+
+      - name: Commit refreshed snapshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data refresh_log.json
+          if git diff --cached --quiet; then
+            echo "Refresh succeeded; no file changes to commit."
+          else
+            git commit -m "Automated BIS data refresh"
+            git push
+          fi
