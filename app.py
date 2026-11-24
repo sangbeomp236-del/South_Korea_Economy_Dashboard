@@ -175,7 +175,12 @@ def line_chart(df, title, y_title, zero=False, benchmark=None, benchmark_label=N
             annotation_position="top left",
         )
     fig.update_layout(
-        title=dict(text=title, font=dict(size=17)),
+        title=dict(
+    text=f"<b>{title}</b>",
+    font=dict(size=21),
+    x=0.01,
+    xanchor="left",
+),
         height=330,
         margin=dict(l=20, r=20, t=55, b=15),
         xaxis_title="",
