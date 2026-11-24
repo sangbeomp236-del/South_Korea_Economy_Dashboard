@@ -74,38 +74,50 @@ def fetch_bis_series(flow: str, key: str, start_period: str) -> pd.DataFrame:
 
 def fetch_oecd_gdp(start_period: str) -> pd.DataFrame:
     """
-    OECD Quarterly real GDP growth - OECD countries.
-    We request only GDP / period-on-period real growth from the specialized dataflow,
-    then filter to Korea (KOR).
+    OECD Korea quarterly real GDP growth:
+    - Korea
+    - Total economy
+    - Gross domestic product
+    - Growth rate, period on period
+    - Chain-linked volume
+    - Calendar and seasonally adjusted
     """
+
     url = (
         "https://sdmx.oecd.org/public/rest/data/"
-        "OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD,1.1/"
-        "Q.....B1GQ......G1."
+        "OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD,/"
+        "Q..KOR.S1..B1GQ......G1."
     )
+
     params = {
         "startPeriod": start_period,
         "dimensionAtObservation": "AllDimensions",
         "format": "csvfile",
     }
+
     r = requests.get(url, params=params, headers=HEADERS, timeout=60)
     r.raise_for_status()
+
     df = pd.read_csv(io.StringIO(r.text))
-    required = {"TIME_PERIOD", "OBS_VALUE", "REF_AREA"}
-    if not required.issubset(df.columns):
+
+    if "TIME_PERIOD" not in df.columns or "OBS_VALUE" not in df.columns:
         raise ValueError(f"Unexpected OECD response columns: {list(df.columns)}")
-    df = df[df["REF_AREA"].astype(str).eq("KOR")].copy()
+
     out = df[["TIME_PERIOD", "OBS_VALUE"]].copy()
     out["OBS_VALUE"] = pd.to_numeric(out["OBS_VALUE"], errors="coerce")
     out["date"] = out["TIME_PERIOD"].map(_parse_period)
-    out = out.dropna(subset=["date", "OBS_VALUE"]).drop_duplicates(
-        subset=["TIME_PERIOD"], keep="last"
+
+    out = (
+        out.dropna(subset=["date", "OBS_VALUE"])
+        .drop_duplicates(subset=["TIME_PERIOD"], keep="last")
+        .sort_values("date")
+        .reset_index(drop=True)
     )
-    out = out.sort_values("date").reset_index(drop=True)
+
     if out.empty:
         raise ValueError("OECD returned no usable Korea GDP observations.")
-    return out
 
+    return out
 
 def refresh_all(write_files: bool = True):
     fetched = {}
