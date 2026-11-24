@@ -1,0 +1,55 @@
+{
+  "success": true,
+  "started_utc": "2026-11-24T16:17:27.758961+00:00",
+  "finished_utc": "2026-11-24T16:17:33.601480+00:00",
+  "series": {
+    "gdp": {
+      "ok": true,
+      "rows": 107,
+      "latest_period": "2026-Q3",
+      "latest_value": 0.968100415
+    },
+    "fx": {
+      "ok": true,
+      "rows": 322,
+      "latest_period": "2026-10",
+      "latest_value": 1335.266738
+    },
+    "reer": {
+      "ok": true,
+      "rows": 322,
+      "latest_period": "2026-10",
+      "latest_value": 95.05
+    },
+    "kr_policy": {
+      "ok": true,
+      "rows": 322,
+      "latest_period": "2026-10",
+      "latest_value": 3.0
+    },
+    "us_policy": {
+      "ok": true,
+      "rows": 322,
+      "latest_period": "2026-10",
+      "latest_value": 3.875
+    },
+    "credit_gap": {
+      "ok": true,
+      "rows": 105,
+      "latest_period": "2026-Q1",
+      "latest_value": -15.1257
+    },
+    "dsr": {
+      "ok": true,
+      "rows": 105,
+      "latest_period": "2026-Q1",
+      "latest_value": 19.3
+    },
+    "house_price": {
+      "ok": true,
+      "rows": 106,
+      "latest_period": "2026-Q2",
+      "latest_value": -0.4738
+    }
+  }
+}
