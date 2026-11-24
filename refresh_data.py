@@ -74,19 +74,20 @@ def fetch_bis_series(flow: str, key: str, start_period: str) -> pd.DataFrame:
 
 def fetch_oecd_gdp(start_period: str) -> pd.DataFrame:
     """
-    OECD Korea quarterly real GDP growth:
-    - Korea
-    - Total economy
+    OECD quarterly real GDP growth:
     - Gross domestic product
     - Growth rate, period on period
     - Chain-linked volume
     - Calendar and seasonally adjusted
+
+    The API query selects GDP and period-on-period growth.
+    Korea is then selected from the returned OECD-country data.
     """
 
     url = (
         "https://sdmx.oecd.org/public/rest/data/"
-        "OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD,/"
-        "Q..KOR.S1..B1GQ......G1."
+        "OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD,1.1/"
+        "Q.....B1GQ......G1."
     )
 
     params = {
@@ -100,8 +101,11 @@ def fetch_oecd_gdp(start_period: str) -> pd.DataFrame:
 
     df = pd.read_csv(io.StringIO(r.text))
 
-    if "TIME_PERIOD" not in df.columns or "OBS_VALUE" not in df.columns:
+    required = {"TIME_PERIOD", "OBS_VALUE", "REF_AREA"}
+    if not required.issubset(df.columns):
         raise ValueError(f"Unexpected OECD response columns: {list(df.columns)}")
+
+    df = df[df["REF_AREA"].astype(str).eq("KOR")].copy()
 
     out = df[["TIME_PERIOD", "OBS_VALUE"]].copy()
     out["OBS_VALUE"] = pd.to_numeric(out["OBS_VALUE"], errors="coerce")
