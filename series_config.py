@@ -7,7 +7,7 @@ SERIES = {
         "unit": "Quarter-on-quarter %",
         "frequency": "Quarterly, seasonally and calendar adjusted",
         "source": "OECD",
-        "source_url": "https://data-explorer.oecd.org/vis?df%5Bag%5D=OECD.SDD.NAD&df%5Bid%5D=DSD_NAMAIN1%40DF_QNA_EXPENDITURE_GROWTH_OECD&dq=Q.....B1GQ......G1.&vw=tb",
+        "source_url": "https://data-explorer.oecd.org/vis?df%5Bag%5D=OECD.SDD.NAD&df%5Bds%5D=dsDisseminateFinalDMZ&df%5Bid%5D=DSD_NAMAIN1%40DF_QNA_EXPENDITURE_GROWTH_OECD&df%5Bvs%5D=1.1",
         "transformation": "OECD real GDP, chain-linked volume; growth rate versus previous quarter; seasonally and calendar adjusted.",
         "pe_use": "Underlying domestic growth backdrop for revenue and exit-multiple underwriting."
     },
