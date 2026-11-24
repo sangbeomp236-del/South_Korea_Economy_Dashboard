@@ -333,7 +333,7 @@ with st.expander("Sources and definitions"):
     for slug, cfg in SERIES.items():
         st.markdown(
             f"**{cfg['label']}**  \n"
-            f"- BIS key: `{cfg['key']}`  \n"
+            f"- Series key: `{cfg.get('key', 'OECD QNA: GDP / period-on-period real growth')}`  \n"
             f"- Unit: {cfg['unit']}  \n"
             f"- Frequency: {cfg['frequency']}  \n"
             f"- Definition / transformation: {cfg['transformation']}  \n"
