@@ -206,7 +206,23 @@ def meta_html(cfg, latest_period, transform_override=None, extra_source=None):
 
 
 def pe_note(text):
-    st.markdown(f"<div class='pe-note'><b>PE lens:</b> {text}</div>", unsafe_allow_html=True)
+    st.markdown(
+        f"""
+        <div style="
+            font-size: 0.86rem;
+            background-color: #2A2D33;
+            color: #E8EAED;
+            border-left: 4px solid #6DB7F2;
+            padding: 0.7rem 0.85rem;
+            margin-top: 0.4rem;
+            margin-bottom: 1.2rem;
+            border-radius: 4px;
+        ">
+            <b style="color:#FFFFFF;">PE lens:</b> {text}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 # Derived policy-rate spread
