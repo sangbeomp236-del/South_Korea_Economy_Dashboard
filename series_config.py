@@ -7,7 +7,7 @@ SERIES = {
         "unit": "Quarter-on-quarter %",
         "frequency": "Quarterly, seasonally and calendar adjusted",
         "source": "OECD",
-        "source_url": "https://data-explorer.oecd.org/vis?df%5Bag%5D=OECD.SDD.NAD&df%5Bds%5D=dsDisseminateFinalDMZ&df%5Bid%5D=DSD_NAMAIN1%40DF_QNA_EXPENDITURE_GROWTH_OECD&df%5Bvs%5D=1.1",
+        "source_url": "https://data-explorer.oecd.org/vis?df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_NAMAIN1%40DF_QNA_EXPENDITURE_GROWTH_OECD&df[ag]=OECD.SDD.NAD&df[vs]=1.1&dq=Q..AUS%2BAUT%2BBEL%2BCAN%2BCHE%2BCHL%2BCOL%2BCRI%2BCZE%2BDEU%2BDNK%2BESP%2BFIN%2BEST%2BFRA%2BGBR%2BGRC%2BHUN%2BISL%2BLTU%2BIRL%2BISR%2BITA%2BJPN%2BKOR%2BLUX%2BLVA%2BMEX%2BNLD%2BNOR%2BNZL%2BPOL%2BPRT%2BSVK%2BSVN%2BSWE%2BTUR%2BUSA%2BOECD%2BG20%2BG7%2BUSMCA%2BOECDE%2BEA%2BEU..........&lom=LASTNPERIODS&lo=5&to[TIME_PERIOD]=false",
         "transformation": "OECD real GDP, chain-linked volume; growth rate versus previous quarter; seasonally and calendar adjusted.",
         "pe_use": "Underlying domestic growth backdrop for revenue and exit-multiple underwriting."
     },
